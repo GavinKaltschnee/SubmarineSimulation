@@ -11,13 +11,11 @@ public class HUD : MonoBehaviour
     [SerializeField] private Slider _DepthSlider;
     [SerializeField] private Submarine _Sub;
     [SerializeField] private Slider ThrustSlider;
-    const float Dist = 15f;
+
 
     void Update()
     {
-        //Vector3 pos = Camera.main.WorldToScreenPoint(_Sub.transform.position + (_Sub.transform.forward.normalized * Dist));
-
-        //Pointer.transform.position = pos;
+        if (Input.GetKeyDown(KeyCode.Mouse1))TargetPointer();
     }
     private void FixedUpdate()
     {
@@ -25,4 +23,20 @@ public class HUD : MonoBehaviour
         _DepthSlider.value = _Sub._CurrentForce;
         ThrustSlider.value = (Input.GetAxis("Vertical"));
     }
+
+    void TargetPointer()
+    {
+        RaycastHit hit;
+        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+        if (Physics.Raycast(ray, out hit, Mathf.Infinity))
+        {
+            if (hit.transform.gameObject.layer == 8)
+            {
+                _Sub._Weapons.Target = hit.transform;
+                Debug.Log("New target of weapons is " + hit.transform.name);
+                Pointer.transform.position = hit.point;
+            }
+        }
+    }
+
 }

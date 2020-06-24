@@ -13,6 +13,7 @@ public class Submarine : MonoBehaviour
     [SerializeField] private Rigidbody _Rb;
     [SerializeField] private AnimationCurve WaterTension;
     [HideInInspector] public float _CurrentForce;
+    public WeaponController _Weapons => gameObject.GetComponent<WeaponController>();//temp
     private bool _Neutral;
     private bool _Diving;
     #endregion Variables

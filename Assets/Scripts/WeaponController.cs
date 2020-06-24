@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class WeaponController : MonoBehaviour
 {
@@ -10,7 +11,9 @@ public class WeaponController : MonoBehaviour
     [SerializeField] private Transform SpawnPoint_R;
     [SerializeField] private float ReloadTimer = 10f;
     private bool Reloading = false;
-
+    public Transform Target;
+    public UnityEvent Fired;
+    public UnityEvent Reloaded;
 
     void Update()
     {
@@ -29,6 +32,7 @@ public class WeaponController : MonoBehaviour
                 _T.Activate();
             }
         }
+        Fired.Invoke();
         StartCoroutine("Reload");
     }
 
@@ -40,6 +44,7 @@ public class WeaponController : MonoBehaviour
             yield return new WaitForSeconds(ReloadTimer);
             ResetTorpedos();
             Reloading = false;
+            Reloaded.Invoke();
             yield break;
 
         }
