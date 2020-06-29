@@ -5,19 +5,16 @@ using UnityEngine;
 public class BallastTank : MonoBehaviour
 {
     #region Variables
-    [SerializeField] private float Speed = 1f;
     [SerializeField] private float Density = 450f;
     [SerializeField] private float DampeningFactor = 0.1f;
     [SerializeField] private Transform Water;
     private Rigidbody _Rb;
-    private Transform _SubPos;
     private Vector3 _Archimedes;
     #endregion Variables
 
     private void Start()
     {
         _Rb = GetComponentInParent<Rigidbody>();
-        _SubPos = transform.parent;
         Initialize();
     }
 
@@ -47,7 +44,7 @@ public class BallastTank : MonoBehaviour
             Vector3 velocity = _Rb.GetPointVelocity(wp);
             Vector3 DampForce = -velocity * DampeningFactor * _Rb.mass;
             Vector3 _Force = DampForce + Mathf.Sqrt(_F) * _Archimedes;
-            _Rb.AddForce(_Force * Power * Speed);
+            _Rb.AddForce(_Force * Power * 1.25f);
         }
     }
 

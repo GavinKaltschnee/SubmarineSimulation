@@ -28,10 +28,10 @@ public class Mine : MonoBehaviour
     }
     private void Explode(GameObject Other)
     {
-        Other.GetComponent<Submarine>().enabled = false;
-        Rigidbody Rb = Other.GetComponent<Rigidbody>();
-        Vector3 random = new Vector3(Random.Range(0, 15), Random.Range(0, 15), Random.Range(0, 15));
-        float Force = Mathf.Pow(Rb.mass, 3);
-        Rb.AddExplosionForce(Force, transform.position + random, 100, 50);
+        //Other.GetComponent<Submarine>().enabled = false;
+        //Rigidbody Rb = Other.GetComponent<Rigidbody>();
+        //Vector3 random = new Vector3(Random.Range(0, 15), Random.Range(0, 15), Random.Range(0, 15));
+        //float Force = Mathf.Pow(Rb.mass, 3);
+        //Rb.AddExplosionForce(Force, transform.position + random, 100, 50);
     }
 }

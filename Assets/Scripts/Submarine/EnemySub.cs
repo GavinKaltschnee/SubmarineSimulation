@@ -5,6 +5,7 @@ using UnityEngine;
 public class EnemySub : MonoBehaviour
 {
     [SerializeField] private Propeller _MainPropeller;
+    [SerializeField] private Sub_Variant SubClass;
 
     private void FixedUpdate()
     {

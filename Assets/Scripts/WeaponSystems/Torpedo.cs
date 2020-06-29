@@ -4,14 +4,13 @@ using UnityEngine;
 
 public class Torpedo : MonoBehaviour
 {
-    private Rigidbody _Rb;
     [SerializeField] private BallastTank _Ballast;
     [SerializeField] private Propeller _Propeller;
     [SerializeField] private ParticleSystem Bubbles;
     [SerializeField] private TrailRenderer Trail;
+    private Rigidbody _Rb;
     public bool _Active = false;
 
-    // Start is called before the first frame update
     void Start()
     {
         _Rb = GetComponent<Rigidbody>();

@@ -5,6 +5,7 @@ using UnityEngine;
 public class Submarine : MonoBehaviour
 {
     #region Variables
+    public WeaponController _Weapons => gameObject.GetComponent<WeaponController>();//temp
     [SerializeField] private BallastTank MainBallast;
     [SerializeField] private BallastTank _BackBallast;//Having two ballast tanks does not currently work
     [SerializeField] private Propeller L_Screw;
@@ -12,8 +13,8 @@ public class Submarine : MonoBehaviour
     [SerializeField] private Propeller Main_Screw;
     [SerializeField] private Rigidbody _Rb;
     [SerializeField] private AnimationCurve WaterTension;
+    [SerializeField] private Sub_Variant SubClass;
     [HideInInspector] public float _CurrentForce;
-    public WeaponController _Weapons => gameObject.GetComponent<WeaponController>();//temp
     private bool _Neutral;
     private bool _Diving;
     #endregion Variables
@@ -21,6 +22,16 @@ public class Submarine : MonoBehaviour
     private void Awake()
     {
         _Rb = GetComponent<Rigidbody>();
+        if (SubClass != null) { InitilaizeSubClass(); }
+    }
+
+    private void InitilaizeSubClass()
+    {
+        Main_Screw.Power = SubClass.MoveSpeed;
+        _Rb.mass = SubClass.Mass;
+        L_Screw.Power = SubClass.TurnSpeed;
+        R_Screw.Power = SubClass.TurnSpeed;
+        _Weapons.AmmoCount = SubClass.AmmoCount;
     }
 
     private void Update()
@@ -69,7 +80,7 @@ public class Submarine : MonoBehaviour
         {
             if (transform.position.y < 0)//Natural buoyancy
             {
-                float F = 0.5f;
+                float F = SubClass.DiveSpeed;
                 _CurrentForce = 1;
                 if (MainBallast != null) { MainBallast.ApplyBuoyancy(F); }
             }
@@ -81,11 +92,11 @@ public class Submarine : MonoBehaviour
         }
         if (_Diving)//Positve Buoyancy 
         {
-            float F = -0.5f;
+            float F = -SubClass.DiveSpeed;
             _CurrentForce = -1;
             if (MainBallast != null) MainBallast.ApplyBuoyancy(F);
         }
         #endregion Buoyancy
-
     }
+
 }

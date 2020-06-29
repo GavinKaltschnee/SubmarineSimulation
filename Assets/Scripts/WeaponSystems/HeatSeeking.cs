@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class HeatSeeking : MonoBehaviour
 {
-    public bool Active;
+    private bool Active;
     private Transform _Target;
     private WeaponController _Main;
     [SerializeField] float SeekingRange = 10f;
@@ -45,7 +45,7 @@ public class HeatSeeking : MonoBehaviour
         Vector3 _Direction = _Target.gameObject.GetComponent<Rigidbody>().velocity;
         while(Active)
         {
-            if (Vector3.Distance(transform.position, _Target.position)< 25f) { yield break; }
+            if (Vector3.Distance(transform.position, _Target.position)< 15f) { transform.LookAt(_Target); yield break; }
             if (_Direction == null) { transform.LookAt(_Target); yield break; }
             Vector3 TargetPosition = _Target.position + _Direction * 2;
             transform.LookAt(TargetPosition);

@@ -6,6 +6,7 @@ using UnityEngine.UI;
 public class Propeller : MonoBehaviour
 {
     #region Variables
+    public float Power { get => _Power; set => _Power = value; }
     [SerializeField] private float _Power = 100;
     [SerializeField] private Rigidbody _Rb;
     [SerializeField] private GameObject _Particles;

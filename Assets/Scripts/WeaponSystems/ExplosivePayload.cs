@@ -1,18 +1,21 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class ExplosivePayload : MonoBehaviour
 {
     private Buoy _Buoyancy;
     [SerializeField] private ParticleSystem Explosion;
     [SerializeField] private string EnemyTag;
+    [SerializeField] private UnityEvent HitTarget;
 
     private void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.CompareTag(EnemyTag))
         {
             Explode(other.gameObject);
+            HitTarget.Invoke();
         }
     }
 
@@ -24,5 +27,4 @@ public class ExplosivePayload : MonoBehaviour
         float Force = Mathf.Pow(Rb.mass, 3);
         Rb.AddExplosionForce(Force, transform.position + random, 100, 50);
     }
-
 }

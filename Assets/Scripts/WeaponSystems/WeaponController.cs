@@ -5,15 +5,18 @@ using UnityEngine.Events;
 
 public class WeaponController : MonoBehaviour
 {
-    [SerializeField]
-    private Torpedo[] Torpedos;
+    #region Variables
+    [SerializeField]private Torpedo[] Torpedos;
     [SerializeField] private Transform SpawnPoint_L;
     [SerializeField] private Transform SpawnPoint_R;
     [SerializeField] private float ReloadTimer = 10f;
+
     private bool Reloading = false;
-    public Transform Target;
+    public Transform Target { get; set; }
+    public int AmmoCount { get; set; }
     public UnityEvent Fired;
     public UnityEvent Reloaded;
+    #endregion
 
     void Update()
     {
@@ -23,6 +26,7 @@ public class WeaponController : MonoBehaviour
         }
     }
 
+    #region Functions
     private void FireWeapons()
     {
         foreach (Torpedo _T in Torpedos)
@@ -61,4 +65,6 @@ public class WeaponController : MonoBehaviour
             _Torp.transform.localRotation = Quaternion.identity;
         }
     }
+    #endregion
+
 }
