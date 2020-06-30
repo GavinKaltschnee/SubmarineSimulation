@@ -49,7 +49,6 @@ public class Underwater : MonoBehaviour
     private void OnDisable()
     {
         _mat.SetFloat("_PixelOffset", 0);
-        _Ambience.volume = 0;
     }
 }
 
