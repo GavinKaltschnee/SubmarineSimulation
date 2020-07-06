@@ -12,10 +12,17 @@ public class Propeller : MonoBehaviour
     [SerializeField] private GameObject _Particles;
     [SerializeField] private Transform _Visual;
     [SerializeField] private _Type Type;
+    [SerializeField] private bool Invert = false;
+    private float _Invert = 1;
     private enum _Type { Vertical, Horizontal, Constant};
     private float _Thrust = 0;
     #endregion Variables
 
+    private void Awake()
+    {
+        if (Invert) { _Invert = -1; }
+        else _Invert = 1;
+    }
     private void FixedUpdate()
     {
         if (_Thrust < _Power)
@@ -30,7 +37,7 @@ public class Propeller : MonoBehaviour
         RotateVisual(_Visual, 1000);
         _Thrust = _Power * Force;
         Mathf.Clamp(_Thrust, -250, 250);
-        _Rb.AddForceAtPosition(transform.forward * _Thrust, transform.position, ForceMode.Force);
+        _Rb.AddForceAtPosition((transform.forward * _Invert)* _Thrust, transform.position, ForceMode.Force);
     }
 
     private void RotateVisual(Transform Screw,float Speed)
@@ -48,6 +55,6 @@ public class Propeller : MonoBehaviour
     private void OnDrawGizmos()//Debug\
     {
         Gizmos.color = Color.yellow;
-        Gizmos.DrawLine(transform.position, transform.forward * 5000f);
+        Gizmos.DrawLine(transform.position, transform.forward * 5000f * _Invert);
     }
 }

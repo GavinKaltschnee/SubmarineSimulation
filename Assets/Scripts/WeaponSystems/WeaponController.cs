@@ -63,6 +63,7 @@ public class WeaponController : MonoBehaviour
         {
             _Torp.DeActivate();
             _Torp.transform.localRotation = Quaternion.identity;
+            _Torp.transform.localRotation = Quaternion.Euler(_Torp.transform.rotation.x, 180, _Torp.transform.rotation.z);
         }
     }
     #endregion

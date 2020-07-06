@@ -20,7 +20,7 @@ public class MineMatrix : MonoBehaviour
             {
                 for (int k = 0; k < MatrixDensity; k++)
                 {
-                    GameObject _Mine =Instantiate(Mine, new Vector3((i + Random.Range(-2000, 2000)), (j+ Random.Range(-500,-1)), (k+Random.Range(-2000,2000))), Quaternion.identity);
+                    GameObject _Mine =Instantiate(Mine, new Vector3((i + Random.Range(-2000, 2000)), (j+ Random.Range(-450,-25)), (k+Random.Range(-2000,2000))), Quaternion.identity);
                     _Mine.transform.parent = this.transform;
                 }
             }
